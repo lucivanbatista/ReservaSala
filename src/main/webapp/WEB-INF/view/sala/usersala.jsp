@@ -26,9 +26,34 @@
 				<h3>Lista de Salas Cadastradas</h3>
 			</div>
 
-			<form action="showsalas" method="get">
-				<button type="submit" class="btn btn-primary btn-md">Listar	Salas Cadastradas</button>
-			</form>
+<!-- 			<div class="form-group"> -->
+<!-- 				<label>Digite o Horário Desejado (A,B,C,D,E,F) </label> <input type="text" class="form-control" id="horario" name="horario"	placeholder="Digite o horário desejado"> -->
+<!-- 			</div> -->
+			
+			<!-- 			<div class="form-group"> -->
+<!-- 				<label>Digite o dia do mês </label> <input type="text" class="form-control" id="diafiltro" name="diafiltro" placeholder="Digite o dia"> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label>Digite o mês desse ano </label> <input type="text" class="form-control" id="mesfiltro" name="mesfiltro" placeholder="Digite o mês"> -->
+<!-- 			</div> -->]
+			<fieldset>
+				<form action="showsalasby" method="get">
+					<h2>Filtros de Pesquisa para Salas</h2>
+					<div class="form-group">
+						<label>Número da Porta da Sala </label> <input type="text" class="form-control" id="nPortafiltro" name="nPortafiltro" placeholder="Digite a porta" autofocus>
+					</div>
+					<div class="form-group">
+						<label>Bloco de onde a Sala está localizada </label> <input type="text" class="form-control" id="blocofiltro" name="blocofiltro" placeholder="Digite o bloco">
+					</div>
+					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas pelo Filtro acima</button>
+				</form>
+			</fieldset>
+			
+			<fieldset>
+				<form action="showsalas" method="get">
+					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas</button>
+				</form>
+			</fieldset>
 
 			<table class="table">
 				<thead>
@@ -52,7 +77,39 @@
 							o que estará acontecendo nessa sala
 							Próximo Passo: Cadastrar uma Reserva para essa sala (OK)
 							Próximo Passo: Condições para não ser possível inserir uma reserva no horário já cadastrado (OK)
-							Próximo Passo: Condições para não ser possível inserir uma sala já cadastrada-->
+							Próximo Passo: Condições para não ser possível inserir uma sala já cadastrada (OK)
+							Usuário Visualizar as reservas e horários disponíveis para cada Sala através de um Botão
+							-->
+							<td>
+								<fieldset class="field_cadastrar">
+									<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#vermodal"><span class="glyphicon glyphicon-plus"></span></button>
+									<div class="modal fade" id="vermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													<h4 class="modal-title" id="myModalLabel">Visualizar Reservas</h4>
+												</div>
+												<form action="visualizarreservaby" method="get">
+													<div class="modal-body">
+														<fieldset>
+														<legend>Informações da Reserva</legend>
+															<input type="hidden" name="idSala" id="idSala" value="${sala.id}">
+														</fieldset>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-sign"></span></button>
+														<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span></button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+							</td>
+							
 							<td>
 								<fieldset class="field_cadastrar">
 									<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addmodal"><span class="glyphicon glyphicon-plus"></span></button>
@@ -80,11 +137,11 @@
 															</div>
 															<div class="form-group">
 																<label>Digite o dia do mês </label>
-																<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o mês">
+																<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o dia">
 															</div>
 															<div class="form-group">
 																<label>Digite o mês desse ano </label>
-																<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o ano">
+																<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o mês">
 															</div>
 														</fieldset>
 													</div>

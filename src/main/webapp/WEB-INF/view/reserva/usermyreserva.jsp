@@ -15,7 +15,7 @@
 	
 	<div class="container">
 		<h1>
-			Minhas Reservas <small> Adicione, Remova, Atualiza e Liste as Suas Reservas</small>
+			Minhas Reservas <small> Remova, Atualiza e Liste as Suas Reservas</small>
 		</h1>
 	</div>
 
@@ -47,7 +47,6 @@
 					<c:forEach items="${reservas}" var="reserva">
 						<tr>
 							<td>${reserva.id}</td>
-<%-- 							<td>${reserva.user.matricula}</td> --%>
 							<td>${reserva.sala.id}</td>
 							<td>${reserva.descricao}</td>
 							<td>${reserva.horario}</td>
@@ -79,17 +78,14 @@
 															<input type="hidden" name="id" id="id" value="${reserva.id}">
 															<input type="text" class="form-control" id="id" name="id" value="${reserva.id}" disabled="disabled">
 														</div>
-<!-- 														<div class="form-group"> -->
-<!-- 															<label>Número da Matrícula do Usuário </label> -->
-<%-- 															<input type="text" class="form-control" id="matriculaUser" name="matriculaUser" value="${reserva.matriculaUser}" autofocus> --%>
-<!-- 														</div> -->
 														<div class="form-group">
 															<label>ID da Sala </label>
-															<input type="text" class="form-control" id="idSala" name="idSala" value="${reserva.sala.id}" autofocus>
+															<input type="hidden" name="idSala" id="idSala" value="${reserva.sala.id}">
+															<input type="text" class="form-control" id="idSala" name="idSala" value="${reserva.sala.id}" disabled="disabled">
 														</div>
 														<div class="form-group">
 															<label>Descrição Geral sobre a Reserva </label>
-															<input type="text" class="form-control" id="descricao" name="descricao" value="${reserva.descricao}">
+															<input type="text" class="form-control" id="descricao" name="descricao" value="${reserva.descricao}" autofocus>
 														</div>
 														<div class="form-group">
 															<label>Horário (A,B,C,D,E,F) </label>

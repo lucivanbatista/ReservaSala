@@ -53,11 +53,11 @@
 									</div>
 									<div class="form-group">
 										<label>Digite o dia do mês </label>
-										<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o mês">
+										<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o dia">
 									</div>
 									<div class="form-group">
 										<label>Digite o mês desse ano </label>
-										<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o ano">
+										<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o mês">
 									</div>
 								</fieldset>
 							</div>

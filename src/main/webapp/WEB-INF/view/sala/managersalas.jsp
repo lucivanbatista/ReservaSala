@@ -66,6 +66,19 @@
 			<div class="panel-body">
 				<h3>Lista de Salas Cadastradas</h3>
 			</div>
+			
+			<fieldset>
+				<form action="showsalasby" method="get">
+					<h2>Filtros de Pesquisa para Salas</h2>
+					<div class="form-group">
+						<label>Número da Porta da Sala </label> <input type="text" class="form-control" id="nPortafiltro" name="nPortafiltro" placeholder="Digite a porta" autofocus>
+					</div>
+					<div class="form-group">
+						<label>Bloco de onde a Sala está localizada </label> <input type="text" class="form-control" id="blocofiltro" name="blocofiltro" placeholder="Digite o bloco">
+					</div>
+					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas pelo Filtro acima</button>
+				</form>
+			</fieldset>
 
 			<form action="showsalas" method="get">
 				<button type="submit" class="btn btn-primary btn-md">Listar	Salas Cadastradas</button>

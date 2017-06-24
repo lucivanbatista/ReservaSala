@@ -62,6 +62,11 @@ public class ReservasController {
 			return "reserva/usermyreserva";
 		}
 	}
+//	
+//	@GetMapping(value = "/visualizarreservaby")
+//	public String showReservaBy(Model model, @RequestParam(value = "") String , ){
+//		
+//	}
 	
 	@PostMapping(value = "/deletereserva")
 	public String deleteReserva(Model model, @RequestParam(value = "idremove") Integer idr, @SessionAttribute("user") Usuario user){

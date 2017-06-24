@@ -1,5 +1,6 @@
 package springboot01.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,6 +43,32 @@ public class SalasController {
 	@GetMapping("/showsalas")
 	public String show(Model model, @SessionAttribute("user") Usuario user) {
 		List<Sala> salas = saladao.findAll();
+		model.addAttribute("salas", salas);
+		if(user.getTipoUser() == 0){
+			return "sala/managersalas";
+		}else{
+			return "sala/usersala";
+		}
+	}
+	
+	//Método usado no showsalasby para retornar apenas a lista de salas
+	public List<Sala> getsalasby(String nPorta, String bloco){
+		List<Sala> salas = new ArrayList<>();
+		if(nPorta.isEmpty() || nPorta == null || nPorta.equals("")){
+			salas = saladao.findByBloco(bloco);
+		}else if(bloco.isEmpty() || bloco == null || bloco.equals("")){
+			salas = saladao.findBynPorta(nPorta);
+		}else if((nPorta.isEmpty() || nPorta == null || nPorta.equals("")) && (bloco.isEmpty() || bloco == null || bloco.equals(""))){
+			return null;
+		}else{
+			salas = saladao.findBynPortaAndBloco(nPorta, bloco);
+		}
+		return salas;
+	}
+	
+	@GetMapping("/showsalasby")
+	public String showsalasby(Model model, @SessionAttribute("user") Usuario user, @RequestParam("nPortafiltro") String nPorta, @RequestParam("blocofiltro") String bloco){
+		List<Sala> salas = getsalasby(nPorta, bloco);
 		model.addAttribute("salas", salas);
 		if(user.getTipoUser() == 0){
 			return "sala/managersalas";
