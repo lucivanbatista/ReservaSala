@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springboot01.dao.UserDao;
+import springboot01.model.Sala;
 import springboot01.model.Usuario;
 
 @Controller
@@ -32,7 +33,6 @@ public class UserController {
 	public String logar(Model model, @RequestParam(value = "user") String email, @RequestParam(value = "senha") String senha, HttpServletRequest req){ 
 		
 		Usuario user = userdao.findByEmailAndSenha(email, senha);
-		
 		if(user == null){
 			System.out.println("NÃO EXISTE ESSE USUÁRIO");
 			return "/login";
@@ -40,6 +40,7 @@ public class UserController {
 		
 		req.getSession().setAttribute("user", user);
 		model.addAttribute(user);
+		//model.addAttribute("sala", new Sala());
 		
 		if(user.getTipoUser() == 0){
 			System.out.println("É ADMIN");

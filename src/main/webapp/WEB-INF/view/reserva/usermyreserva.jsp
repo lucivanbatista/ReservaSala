@@ -25,7 +25,7 @@
 				<h3>Lista de Minhas Reservas Cadastradas</h3>
 			</div>
 
-			<form action="showallreservas" method="get">
+			<form action="showallmyreservas" method="get">
 				<button type="submit" class="btn btn-primary btn-md">Listar	Reservas Cadastradas</button>
 			</form>
 

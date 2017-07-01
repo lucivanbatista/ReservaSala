@@ -10,7 +10,11 @@
 		<li><a href="managersalas" class="btn btn-basic">Gerenciamento de Salas <span class="glyphicon glyphicon-modal-window"></span></a></li>
 		<li><a href="managerreservas" class="btn btn-basic">Gerenciamento de Reservas <span class="glyphicon glyphicon-modal-window"></span></a></li>
 		<li><a href="????????????" class="btn btn-basic">Sobre <span class="glyphicon glyphicon-barcode"></span></a></li>
-		<li><a href="logout" class="btn btn-basic">Logout <span class="glyphicon glyphicon-barcode"></span></a></li>
+	</ul>
+	
+	<ul class="nav navbar-nav collapse navbar-collapse pull-right">
+		<li><a href="#" class="btn btn-basic">${user.nome} <span class="glyphicon glyphicon-user"></span></a>
+		<li><a href="logout" class="btn btn-basic">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
 	</ul>
 </div>
 

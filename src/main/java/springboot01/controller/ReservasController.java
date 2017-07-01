@@ -52,8 +52,8 @@ public class ReservasController {
 		}
 	}
 	
-	@GetMapping(value = "/showallreservas")
-	public String showAllReserva(Model model, @SessionAttribute("user") Usuario user){
+	@GetMapping(value = "/showallmyreservas")
+	public String showAllMyReserva(Model model, @SessionAttribute("user") Usuario user){
 		List<Reserva> reservas = reservedao.findByUser(user);
 		model.addAttribute("reservas", reservas);
 		if(user.getTipoUser() == 0){
@@ -62,6 +62,14 @@ public class ReservasController {
 			return "reserva/usermyreserva";
 		}
 	}
+	
+	@GetMapping(value = "/showallreservas")
+	public String showAllReserva(Model model){
+		List<Reserva> reservas = reservedao.findAll();
+		model.addAttribute("reservas", reservas);
+		return "reserva/managerreservas";
+	}
+	
 //	
 //	@GetMapping(value = "/visualizarreservaby")
 //	public String showReservaBy(Model model, @RequestParam(value = "") String , ){
@@ -73,9 +81,9 @@ public class ReservasController {
 		reservedao.delete(idr);
 		model.addAttribute("reservas", reservedao.findByUser(user));
 		if(user.getTipoUser() == 0){
-			return "reserva/managerreservas";
+			return "redirect:/managerreservas";
 		}else{
-			return "reserva/usermyreserva";
+			return "redirect:/usermyreserva";
 		}
 	}
 	
@@ -88,9 +96,9 @@ public class ReservasController {
 		model.addAttribute("reserva", r);
 		model.addAttribute("reservas", reservedao.findByUser(user));
 		if(user.getTipoUser() == 0){
-			return "reserva/managerreservas";
+			return "redirect:/managerreservas";
 		}else{
-			return "reserva/usermyreserva";
+			return "redirect:/usermyreserva";
 		}
 	}
 	

@@ -28,15 +28,22 @@ public class SalasController {
 	private RoomDao saladao;
 	
 	@PostMapping(value = "/criarsalas")
-	public String createSala(Model model, @Valid Sala sala, BindingResult result, RedirectAttributes redirectAttributes) {	
+	public String createSala(@Valid Sala sala, BindingResult result, Model model, RedirectAttributes redirectAttributes) {	
 		List<Sala> salas = saladao.findAll();
 		for(Sala s : salas){
-			if(s.getBloco() == sala.getBloco() && s.getnPorta() == sala.getnPorta()){
+			if(s.getBloco().equals(sala.getBloco()) && s.getnPorta().equals(sala.getnPorta())){
 				return "sala/managersalas";
 			}
 		}
-		model.addAttribute("sala", sala);
+		
+		if(result.hasErrors()) {
+			model.addAttribute("sala", sala);
+			return "sala/managersalas";
+		}
+		
+		
 		saladao.save(sala);
+		redirectAttributes.addFlashAttribute("msg", "Sala inserida com sucesso.");
 		return "sala/managersalas";
 	}
 	
@@ -68,7 +75,14 @@ public class SalasController {
 	
 	@GetMapping("/showsalasby")
 	public String showsalasby(Model model, @SessionAttribute("user") Usuario user, @RequestParam("nPortafiltro") String nPorta, @RequestParam("blocofiltro") String bloco){
-		List<Sala> salas = getsalasby(nPorta, bloco);
+		List<Sala> salas = null;
+		if(nPorta.equals("") && bloco.equals("")){
+			salas = saladao.findAll();
+			
+		}else{
+			salas = getsalasby(nPorta, bloco);
+		}
+		
 		model.addAttribute("salas", salas);
 		if(user.getTipoUser() == 0){
 			return "sala/managersalas";

@@ -78,15 +78,19 @@
 				<h3>Lista de Reservas Cadastradas</h3>
 			</div>
 
-			<form action="showallreservas" method="get">
+			<form action="showallmyreservas" method="get">
 				<button type="submit" class="btn btn-primary btn-md">Listar	Reservas Cadastradas</button>
+			</form>
+			
+			<form action="showallreservas" method="get">
+				<button type="submit" class="btn btn-primary btn-md">Listar	TODAS as Reservas Cadastradas</button>
 			</form>
 
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ID da Reserva</th>
-<!-- 						<th>Matrícula do Usuário</th> -->
+						<th>Matrícula do Usuário</th>
 						<th>ID da Sala</th>
 						<th>Descrição Geral da Reserva</th>
 						<th>Horário</th>
@@ -100,7 +104,7 @@
 					<c:forEach items="${reservas}" var="reserva">
 						<tr>
 							<td>${reserva.id}</td>
-<%-- 							<td>${reserva.user.matricula}</td> --%>
+							<td>${reserva.user.matricula}</td>
 							<td>${reserva.sala.id}</td>
 							<td>${reserva.descricao}</td>
 							<td>${reserva.horario}</td>
@@ -132,10 +136,10 @@
 															<input type="hidden" name="id" id="id" value="${reserva.id}">
 															<input type="text" class="form-control" id="id" name="id" value="${reserva.id}" disabled="disabled">
 														</div>
-<!-- 														<div class="form-group"> -->
-<!-- 															<label>Número da Matrícula do Usuário </label> -->
-<%-- 															<input type="text" class="form-control" id="matriculaUser" name="matriculaUser" value="${reserva.matriculaUser}" autofocus> --%>
-<!-- 														</div> -->
+														<div class="form-group">
+															<label>Número da Matrícula do Usuário </label>
+															<input type="text" class="form-control" id="matriculaUser" name="matriculaUser" value="${reserva.user.matricula}" disabled="disabled" autofocus>
+														</div>
 														<div class="form-group">
 															<label>ID da Sala </label>
 															<input type="text" class="form-control" id="idSala" name="idSala" value="${reserva.sala.id}" autofocus>

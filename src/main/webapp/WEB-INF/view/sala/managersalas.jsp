@@ -36,6 +36,7 @@
 							<div class="modal-body">
 								<fieldset>
 								<legend>Informações da Sala</legend>
+									
 									<div class="form-group">
 										<label>Número da Porta da Sala </label>
 										<input type="text" class="form-control" id="nPorta" name="nPorta" placeholder="Digite o número da porta" autofocus required>
@@ -60,6 +61,43 @@
 			</div>
 		</fieldset>
 	</div>
+	
+<!-- 	---------------VALIDAÇÃO SERÁ COLOCADA ACIMA------------------- -->
+<%-- 	<form:form action="criarsalas" method="post" modelAttribute="sala"> --%>
+<!-- 							<div class="modal-body"> -->
+<!-- 								<fieldset> -->
+<!-- 								<legend>Informações da Sala</legend> -->
+<%-- 									<form:input path="id" type="hidden"  />									 --%>
+<!-- 									<spring:bind path="nPorta"> -->
+<%-- 										<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
+<%-- 											<form:label path="nPorta">Número da Porta da Sala </form:label> --%>
+<%-- 											<form:input path="nPorta" type="text" cssClass="form-control" /> --%>
+<%-- 											<form:errors path="nPorta" /> --%>
+<!-- 										</div> -->
+<!-- 									</spring:bind> -->
+
+<!-- 									<spring:bind path="bloco"> -->
+<%-- 									<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
+<%-- 											<form:label path="bloco">Bloco de onde a Sala está localizada </form:label> --%>
+<%-- 											<form:input path="bloco" type="text" cssClass="form-control" /> --%>
+<%-- 											<form:errors path="bloco" /> --%>
+<!-- 										</div> -->
+<!-- 									</spring:bind> -->
+									
+<!-- 									<spring:bind path="descricao"> -->
+<%-- 										<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
+<%-- 											<form:label path="descricao">Descrição Geral sobre a Sala </form:label> --%>
+<%-- 											<form:input path="descricao" type="text" cssClass="form-control" /> --%>
+<%-- 											<form:errors path="descricao" /> --%>
+<!-- 										</div> -->
+<!-- 									</spring:bind> -->
+<!-- 								</fieldset> -->
+<!-- 							</div> -->
+<!-- 							<div class="modal-footer"> -->
+<!-- 								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button> -->
+<!-- 								<button type="submit" class="btn btn-success">Confirmar</button> -->
+<!-- 							</div> -->
+<%-- 						</form:form> --%>
 
 	<div class="container">
 		<div class="panel panel-default">
@@ -76,13 +114,9 @@
 					<div class="form-group">
 						<label>Bloco de onde a Sala está localizada </label> <input type="text" class="form-control" id="blocofiltro" name="blocofiltro" placeholder="Digite o bloco">
 					</div>
-					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas pelo Filtro acima</button>
+					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas</button>
 				</form>
 			</fieldset>
-
-			<form action="showsalas" method="get">
-				<button type="submit" class="btn btn-primary btn-md">Listar	Salas Cadastradas</button>
-			</form>
 
 			<table class="table">
 				<thead>
