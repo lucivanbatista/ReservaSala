@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Sistema de Reservas de Salas - Página Inicial</title>
+	<title>Sistema de Reservas de Salas - Sobre</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="css/bootstrap-united.min.css">
 	<link rel="stylesheet" href="css/estilosalas.css">
@@ -21,8 +21,24 @@
 	
 	<div class="container intro">
 		<h1>
-			Página Inicial <small> Reserve e gerencie salas para utilizar futuramente!</small>
+			Sobre o Sistema
 		</h1>
+	</div>
+	
+	<div class="container">
+		<h4>
+			<p>Sistema desenvolvido como o objetivo do Trabalho Final da disciplina de Programação de Software para WEB</p>
+			<p>Funções do Sistema: </p>
+			<ul>
+				<li>Cadastrar / Remover / Alterar / Visualizar Salas</li>
+				<li>Criar / Remover / Alterar / Visualziar Reservas</li>
+				<li>Criar / Alterar Conta de Usuário</li>
+				<li>Logar / Deslogar do Sistema</li>
+				<li>Entre outras funções... </li>
+			</ul>
+		</h4>
+		<h5>Desenvolvido pelo aluno: José Lucivan Batista Freires</h5>
+		<h5>Para mais informações, entre em contato pelo email: lucivanbatista98@gmail.com ou pelo telefone: (88) 997920355</h5>		
 	</div>
 	
 	<c:if test = "${user.tipoUser > 0}">

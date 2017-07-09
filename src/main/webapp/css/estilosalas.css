@@ -1,3 +1,36 @@
+body {
+	background: #C0C0C0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-bottom: 50px;
+}
+
+.navbar-fixed-bottom{
+	padding: 0;
+}
+
+.panel-footer p{
+	border: 0;
+	margin: 0;
+	text-align: center;
+}
+
+.panel-footer{
+	padding: 5px;
+	border: 0;
+	margin: 0;
+}
+
+.intro{
+	padding-top: 50px;
+}
+
+.panel{
+	background-color: #C0C0C0;
+}
+
 .field_cadastrar{
 	width: 60%;
 	padding: 20px;
@@ -7,8 +40,8 @@
 	width: 50%;
 }
 
-fieldset form input[type="text"] {
-    width: 200px;
+fieldset form input[type="text"], input[type="email"], input[type="password"]{
+    width: 400px;
 }
 
 div #logo_geral{
@@ -16,3 +49,13 @@ div #logo_geral{
 	padding: 0;
 	margin-top: 20px;
 }
+
+.box{
+	padding: 20px;
+	padding-top: 0px;
+}
+
+.box h3{
+	margin: 0px;
+}
+

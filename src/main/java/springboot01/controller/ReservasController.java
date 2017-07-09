@@ -2,8 +2,6 @@ package springboot01.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +28,22 @@ public class ReservasController {
 	private RoomDao saladao;
 	
 	@PostMapping(value = "/criarreserva")
-	public String insertReserva(Model model, @Valid Reserva r, @SessionAttribute("user") Usuario user, @RequestParam(value = "idSala") Integer idsala){
+	public String insertReserva(Model model, Reserva r, @SessionAttribute("user") Usuario user, @RequestParam(value = "idSala") Integer idsala,
+			@RequestParam(value = "horarior") String horario, @RequestParam(value = "diar") Integer dia, @RequestParam(value = "mesr") Integer mes){
 		Sala sala = saladao.findOne(idsala);
-		Reserva rnew = new Reserva(r.getId(), user, sala, r.getDescricao(), r.getHorario(), r.getDia(), r.getMes());
+		Reserva rnew = new Reserva(r.getId(), user, sala, r.getDescricao(), horario, dia, mes);
 		List<Reserva> reservas = reservedao.findAll();
-		for(Reserva reserva : reservas){
-			if(reserva.getMes() == rnew.getMes() && reserva.getDia() == rnew.getDia() && reserva.getHorario() == rnew.getHorario() && reserva.getSala().getId() == rnew.getSala().getId()){
-				if(user.getTipoUser() == 0){
-					return "reserva/managerreservas";
+		for(Reserva reserva : reservas){		
+			if(reserva.getMes() == rnew.getMes() && reserva.getDia() == rnew.getDia() && reserva.getHorario().equals(rnew.getHorario()) && reserva.getSala().getId() == rnew.getSala().getId()){
+				if(user.getTipoUser() == 2 && reserva.getUser().getTipoUser() == 1){
+					reservedao.delete(reserva.getId());
+					break;
 				}else{
-					return "sala/usersala";
+					if(user.getTipoUser() == 0){
+						return "reserva/managerreservas";
+					}else{
+						return "sala/usersala";
+					}
 				}
 			}
 		}
@@ -89,10 +93,14 @@ public class ReservasController {
 	}
 	
 	@PostMapping(value = "/updatereserva")
-	public String updateReserva(Model model, Reserva r, @SessionAttribute("user") Usuario user, @RequestParam("idSala") Integer idsala){
+	public String updateReserva(Model model, Reserva r, @SessionAttribute("user") Usuario user, @RequestParam("idSala") Integer idsala,
+			@RequestParam(value = "horarior") String horario, @RequestParam(value = "diar") Integer dia, @RequestParam(value = "mesr") Integer mes){
 		Sala sala = saladao.findOne(idsala);
 		r.setUser(user);
 		r.setSala(sala);
+		r.setHorario(horario);
+		r.setDia(dia);
+		r.setMes(mes);
 		reservedao.save(r);
 		model.addAttribute("reserva", r);
 		model.addAttribute("reservas", reservedao.findByUser(user));

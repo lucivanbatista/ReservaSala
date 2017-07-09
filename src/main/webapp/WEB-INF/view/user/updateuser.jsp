@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Sistema de Reserva de Salas - Página Inicial</title>
+	<title>Sistema de Reservas de Salas - Atualizar Cadastro</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="css/bootstrap-united.min.css">
 	<link rel="stylesheet" href="css/estilosalas.css">
@@ -19,9 +19,9 @@
          <c:import url="/imports/cabecalho_adm.jsp" />
     </c:if>
 	
-	<div class="container">
+	<div class="container intro">
 		<h1>
-			Página Atualizar Cadastro <small> Atualize suas informações!</small>
+			Atualizar Cadastro <small> Atualize suas informações!</small>
 		</h1>
 	</div>
 	
@@ -32,8 +32,7 @@
 			</div>
 
 			<fieldset class="field_cadastrar">
-				<legend>Atualizar</legend>
-				<form action="atualizaruser" method="post">
+				<form action="atualizaruser" method="post" id="formuserup">
 					<input type="hidden" name="matricula" id="matricula" value="${user.matricula}">
 					<input type="hidden" name="tipoUser" id="tipoUser" value="${user.tipoUser}">
 					<div class="form-group row">
@@ -49,14 +48,13 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label col-form-label-sm">Senha</label>
+						<label class="col-sm-2 col-form-label col-form-label-sm">Senha Antiga</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="senha" name="senha" value="${user.senha}">
 						</div>
-					</div>
+					</div>					
 					
-					
-					<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#updateusermodal" >Atualizar Informações</button>
+					<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#updateusermodal"><span class="glyphicon glyphicon-floppy-disk"> </span> Atualizar Informações</button>
 
 					<div class="modal fade" id="updateusermodal" role="dialog">
 						<div class="modal-dialog modal-md">

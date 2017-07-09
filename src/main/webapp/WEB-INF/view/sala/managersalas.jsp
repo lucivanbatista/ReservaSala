@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Gerenciador de Salas</title>
+	<title>Sistema de Reservas de Salas - Gerenciador de Salas</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="css/bootstrap-united.min.css">
 	<link rel="stylesheet" href="css/estilosalas.css">
@@ -20,7 +20,7 @@
          <c:import url="/imports/cabecalho_adm.jsp" />
     </c:if>
 	
-	<div class="container">
+	<div class="container intro">
 		<h1>
 			Gerenciador de Salas <small> Adicione, Remova, Atualiza e Liste as Salas - Função Administrador</small>
 		</h1>
@@ -28,7 +28,7 @@
 
 	<div class="container">
 		<fieldset class="field_cadastrar">
-			<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addmodal">Adicionar Sala</button>
+			<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addmodal"><span class="glyphicon glyphicon-plus"></span>   Adicionar Sala</button>
 			<div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -45,69 +45,32 @@
 		</fieldset>
 	</div>
 	
-<!-- 	---------------VALIDAÇÃO SERÁ COLOCADA ACIMA------------------- -->
-<%-- 	<form:form action="criarsalas" method="post" modelAttribute="sala"> --%>
-<!-- 							<div class="modal-body"> -->
-<!-- 								<fieldset> -->
-<!-- 								<legend>Informações da Sala</legend> -->
-<%-- 									<form:input path="id" type="hidden"  />									 --%>
-<!-- 									<spring:bind path="nPorta"> -->
-<%-- 										<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
-<%-- 											<form:label path="nPorta">Número da Porta da Sala </form:label> --%>
-<%-- 											<form:input path="nPorta" type="text" cssClass="form-control" /> --%>
-<%-- 											<form:errors path="nPorta" /> --%>
-<!-- 										</div> -->
-<!-- 									</spring:bind> -->
-
-<!-- 									<spring:bind path="bloco"> -->
-<%-- 									<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
-<%-- 											<form:label path="bloco">Bloco de onde a Sala está localizada </form:label> --%>
-<%-- 											<form:input path="bloco" type="text" cssClass="form-control" /> --%>
-<%-- 											<form:errors path="bloco" /> --%>
-<!-- 										</div> -->
-<!-- 									</spring:bind> -->
-									
-<!-- 									<spring:bind path="descricao"> -->
-<%-- 										<div class="form-group ${status.error ? 'has-error' : ''}"> --%>
-<%-- 											<form:label path="descricao">Descrição Geral sobre a Sala </form:label> --%>
-<%-- 											<form:input path="descricao" type="text" cssClass="form-control" /> --%>
-<%-- 											<form:errors path="descricao" /> --%>
-<!-- 										</div> -->
-<!-- 									</spring:bind> -->
-<!-- 								</fieldset> -->
-<!-- 							</div> -->
-<!-- 							<div class="modal-footer"> -->
-<!-- 								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button> -->
-<!-- 								<button type="submit" class="btn btn-success">Confirmar</button> -->
-<!-- 							</div> -->
-<%-- 						</form:form> --%>
-
 	<div class="container">
-		<div class="panel panel-default">
+		<div class="panel panel-default box">
 			<div class="panel-body">
-				<h2>Filtros de Pesquisa para Salas</h2>
+				<h3>Filtros de Pesquisa para Salas</h3>
 			</div>
-			
 			
 			<fieldset>
 				<form action="showsalasby" method="get">
-					
 					<div class="form-group">
 						<label>Número da Porta da Sala </label> <input type="text" class="form-control" id="nPortafiltro" name="nPortafiltro" placeholder="Digite a porta" autofocus>
 					</div>
 					<div class="form-group">
 						<label>Bloco de onde a Sala está localizada </label> <input type="text" class="form-control" id="blocofiltro" name="blocofiltro" placeholder="Digite o bloco">
 					</div>
-					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas</button>
+					<button type="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-search"> </span> Listar	as Salas Cadastradas</button>
 				</form>
 			</fieldset>
 		</div>
 	</div>
 	
 	<div class="container">
-		<div class="panel-body">
-			<h3>Lista de Salas Cadastradas</h3>
-		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>Lista de Salas Cadastradas</h3>
+			</div>
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -115,6 +78,8 @@
 						<th>Número da Porta da Sala</th>
 						<th>Bloco da Sala</th>
 						<th>Descrição Geral da Sala</th>
+						<th></th>
+						<th></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -142,16 +107,71 @@
 													<fieldset>
 														<input type="hidden" name="idsalafiltro" id="idsalafiltro" value="${sala.id}">
 														<div class="form-group">
-															<label>Digite o Horário Desejado (A,B,C,D,E,F) </label>
-															<input type="text" class="form-control" id="horariofiltro" name="horariofiltro" placeholder="Digite o horário desejado">
+															<label>Selecione o Horário Desejado </label><br>
+															<select id="horariofiltro" name="horariofiltro">
+																<option value="">Todos</option>
+																<option value="A">A (08:00 - 10:00)</option>
+																<option value="B">B (10:00 - 12:00)</option>
+																<option value="C">C (13:30 - 15:30)</option>
+																<option value="D">D (15:30 - 17:30)</option>
+																<option value="E">E (18:00 - 20:00)</option>
+																<option value="F">F (20:00 - 22:00)</option>
+															</select>
 														</div>
 														<div class="form-group">
-															<label>Digite o dia do mês </label>
-															<input type="text" class="form-control" id="diafiltro" name="diafiltro" placeholder="Digite o dia">
+															<label>Selecione o dia do mês </label><br>
+															<select id="diafiltro" name="diafiltro">
+																<option value="">Todos</optin>
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+																<option value="6">6</option>
+																<option value="7">7</option>
+																<option value="8">8</option>
+																<option value="9">9</option>
+																<option value="10">10</option>
+																<option value="11">11</option>
+																<option value="12">12</option>
+																<option value="13">13</option>
+																<option value="14">14</option>
+																<option value="15">15</option>
+																<option value="16">16</option>
+																<option value="17">17</option>
+																<option value="18">18</option>
+																<option value="19">19</option>
+																<option value="20">20</option>
+																<option value="21">21</option>
+																<option value="22">22</option>
+																<option value="23">23</option>
+																<option value="24">24</option>
+																<option value="25">25</option>
+																<option value="26">26</option>
+																<option value="27">27</option>
+																<option value="28">28</option>
+																<option value="29">29</option>
+																<option value="30">30</option>
+																<option value="31">31</option>
+															</select>
 														</div>
 														<div class="form-group">
-															<label>Digite o mês desse ano </label>
-															<input type="text" class="form-control" id="mesfiltro" name="mesfiltro" placeholder="Digite o mês">
+															<label>Selecione o mês </label><br>
+															<select id="mesfiltro" name="mesfiltro">
+																<option value="">Todos</optin>
+																<option value="1">Janeiro</option>
+																<option value="2">Fevereiro</option>
+																<option value="3">Março</option>
+																<option value="4">Abril</option>
+																<option value="5">Maio</option>
+																<option value="6">Junho</option>
+																<option value="7">Julho</option>
+																<option value="8">Agosto</option>
+																<option value="9">Setembro</option>
+																<option value="10">Outubro</option>
+																<option value="11">Novembro</option>
+																<option value="12">Dezembro</option>
+																</select>
 														</div>
 													</fieldset>
 												</div>
@@ -184,8 +204,8 @@
 								
 							</td>
 							<td>
-								<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#${sala.id}"><span class="glyphicon glyphicon-pencil"></span></button>
-								<div class="modal fade" id="${sala.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#${sala.id}update"><span class="glyphicon glyphicon-pencil"></span></button>
+								<div class="modal fade" id="${sala.id}update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -228,8 +248,8 @@
 							</td>
 							
 							<td>
-								<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addreservemodal"><span class="glyphicon glyphicon-plus"></span></button>
-								<div class="modal fade" id="addreservemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+								<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#${sala.id}addreservemodal"><span class="glyphicon glyphicon-plus"></span></button>
+								<div class="modal fade" id="${sala.id}addreservemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -248,16 +268,68 @@
 															<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite uma descrição sobre a reserva">
 														</div>
 														<div class="form-group">
-															<label>Digite o Horário Desejado (A,B,C,D,E,F) </label>
-															<input type="text" class="form-control" id="horario" name="horario" placeholder="Digite o horário desejado">
+															<label>Selecione o Horário Desejado </label><br>
+															<select id="horarior" name="horarior">
+																<option value="A">A (08:00 - 10:00)</option>
+																<option value="B">B (10:00 - 12:00)</option>
+																<option value="C">C (13:30 - 15:30)</option>
+																<option value="D">D (15:30 - 17:30)</option>
+																<option value="E">E (18:00 - 20:00)</option>
+																<option value="F">F (20:00 - 22:00)</option>
+															</select>
 														</div>
 														<div class="form-group">
-															<label>Digite o dia do mês </label>
-															<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o dia">
+															<label>Selecione o dia do mês </label><br>
+															<select id="diar" name="diar">
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+																<option value="6">6</option>
+																<option value="7">7</option>
+																<option value="8">8</option>
+																<option value="9">9</option>
+																<option value="10">10</option>
+																<option value="11">11</option>
+																<option value="12">12</option>
+																<option value="13">13</option>
+																<option value="14">14</option>
+																<option value="15">15</option>
+																<option value="16">16</option>
+																<option value="17">17</option>
+																<option value="18">18</option>
+																<option value="19">19</option>
+																<option value="20">20</option>
+																<option value="21">21</option>
+																<option value="22">22</option>
+																<option value="23">23</option>
+																<option value="24">24</option>
+																<option value="25">25</option>
+																<option value="26">26</option>
+																<option value="27">27</option>
+																<option value="28">28</option>
+																<option value="29">29</option>
+																<option value="30">30</option>
+																<option value="31">31</option>
+															</select>
 														</div>
 														<div class="form-group">
-															<label>Digite o mês desse ano </label>
-															<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o mês">
+															<label>Selecione o mês </label><br>
+															<select id="mesr" name="mesr">
+																<option value="1">Janeiro</option>
+																<option value="2">Fevereiro</option>
+																<option value="3">Março</option>
+																<option value="4">Abril</option>
+																<option value="5">Maio</option>
+																<option value="6">Junho</option>
+																<option value="7">Julho</option>
+																<option value="8">Agosto</option>
+																<option value="9">Setembro</option>
+																<option value="10">Outubro</option>
+																<option value="11">Novembro</option>
+																<option value="12">Dezembro</option>
+																</select>
 														</div>
 													</fieldset>
 												</div>
@@ -274,6 +346,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
 	</div>
 	
 	<c:if test = "${user.tipoUser > 0}">

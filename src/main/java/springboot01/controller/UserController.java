@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springboot01.dao.UserDao;
-import springboot01.model.Sala;
 import springboot01.model.Usuario;
 
 @Controller
@@ -23,8 +22,9 @@ public class UserController {
 	private UserDao userdao;
 	
 	@PostMapping("/cadastrouser")
-	public String insertUser(Model model, @Valid Usuario user){
+	public String insertUser(Model model, Usuario user, @RequestParam(value = "tipoUser") Integer tipoUser){
 		model.addAttribute("usuario", user);
+		user.setTipoUser(tipoUser);
 		userdao.save(user);
 		return "/login";
 	}
@@ -34,7 +34,6 @@ public class UserController {
 		
 		Usuario user = userdao.findByEmailAndSenha(email, senha);
 		if(user == null){
-			System.out.println("NÃO EXISTE ESSE USUÁRIO");
 			return "/login";
 		}
 		
@@ -44,11 +43,11 @@ public class UserController {
 //		model.addAttribute("salas", new Sala());
 		
 		if(user.getTipoUser() == 0){
-			System.out.println("É ADMIN");
 			return "sala/managersalas";
-		}else{
-			System.out.println("É USUÁRIO PROFESSOR OU ALUNO");
+		}else if(user.getTipoUser() == 1 || user.getTipoUser() == 2){
 			return "user/indexuser";
+		}else{
+			return "/login";
 		}
 	}
 	
@@ -88,5 +87,10 @@ public class UserController {
 	@RequestMapping("/updateuser")
 	public String updateuser(){
 		return "user/updateuser";
+	}
+	
+	@RequestMapping("/sobre")
+	public String sobre(){
+		return "user/sobre";
 	}
 }

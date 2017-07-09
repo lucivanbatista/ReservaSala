@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity(name="reservas")
 public class Reserva {
@@ -22,7 +21,7 @@ public class Reserva {
 	private Sala sala;
 	
 	@NotNull
-	@Size(min = 10, max = 200, message = "O tamanho deve ser entre {min} e {max}")
+//	@Size(min = 10, max = 200, message = "O tamanho deve ser entre {min} e {max}")
 	private String descricao;
 	
 	@NotNull

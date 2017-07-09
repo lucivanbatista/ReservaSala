@@ -23,7 +23,7 @@ public class Sala {
 	private String bloco;
 	
 	@NotNull
-	@Size(min = 10, max = 200, message = "O tamanho deve ser entre {min} e {max}")
+//	@Size(min = 10, max = 200, message = "O tamanho deve ser entre {min} e {max}")
 	private String descricao;
 	
 //	@OneToMany

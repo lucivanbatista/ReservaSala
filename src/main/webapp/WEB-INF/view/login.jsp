@@ -8,7 +8,8 @@
 	<title>Sistema de Reservas de Salas - Login</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="css/bootstrap-united.min.css">
-	<link rel="stylesheet" href="css/estilosalas.css">
+	<link rel="stylesheet" href="css/estilologin.css">
+	
 </head>
 <body>
 	
@@ -19,17 +20,26 @@
 	</div>
 
 	<div class="container">
-		<fieldset class="field_login">
-			<form action="logar" method="post">
-				Email do Usuário: <input type="text" name="user" id="user">
-				Senha do Usuário: <input type="password" name="senha" id="senha">
-				<button type="submit" class="btn btn-success btn-md" id="login">Login</button>
-			</form>
-		</fieldset>
-	</div>
-	
-	<div class="container">
-		<p> Não é cadastrado? Se cadastre agora: </p><a href="/cadastro">Cadastrar Aqui</a>
+  
+		<div class="row" id="pwd-container">
+		    <div class="col-md-4"></div>
+		    
+		    <div class="col-md-4">
+		    	<div class="login-form">
+		        	<form method="post" action="logar" role="login">
+		        		<img src="<c:url value="/img/logo.png"/>" class="img-responsive" />
+		        		<input type="email" name="user" id="user" placeholder="Email" required class="form-control input-lg" />
+				        <input type="password" class="form-control input-lg" id="senha" name="senha" placeholder="Password" required="" />
+				        <button type="submit" id="login" class="btn btn-lg btn-primary btn-block">Login</button>
+				        <div>
+				        	<a href="/cadastro">Criar uma Conta</a>
+				        </div>
+				    </form>
+				</div>  
+			</div>
+		      
+		   	<div class="col-md-4"></div>
+		</div>
 	</div>
 	
 	<script src="js/jquery.js"></script>
