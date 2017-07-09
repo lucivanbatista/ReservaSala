@@ -12,7 +12,13 @@
 	<link rel="stylesheet" href="css/estilosalas.css">
 </head>
 <body>
-	<c:import url="/imports/cabecalho_adm.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/cabecalho.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/cabecalho_adm.jsp" />
+    </c:if>
 	
 	<div class="container">
 		<h1>
@@ -32,30 +38,7 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">Adicionar Sala</h4>
 						</div>
-						<form:form action="criarsalas" method="post">
-							<div class="modal-body">
-								<fieldset>
-								<legend>Informações da Sala</legend>
-									
-									<div class="form-group">
-										<label>Número da Porta da Sala </label>
-										<input type="text" class="form-control" id="nPorta" name="nPorta" placeholder="Digite o número da porta" autofocus required>
-									</div>
-									<div class="form-group">
-										<label>Bloco de onde a Sala está localizada </label>
-										<input type="text" class="form-control" id="bloco" name="bloco"	placeholder="Digite o bloco desta sala" required>
-									</div>
-									<div class="form-group">
-										<label>Descrição Geral sobre a Sala </label>
-										<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite uma descrição sobre a sala" required>
-									</div>
-								</fieldset>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-								<button type="submit" class="btn btn-success">Confirmar</button>
-							</div>
-						</form:form>
+						<c:import url="/imports/form_cad_sala.jsp" /> <%--importando da pasta imports o cadastrar salas --%>
 					</div>
 				</div>
 			</div>
@@ -102,12 +85,13 @@
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h3>Lista de Salas Cadastradas</h3>
+				<h2>Filtros de Pesquisa para Salas</h2>
 			</div>
+			
 			
 			<fieldset>
 				<form action="showsalasby" method="get">
-					<h2>Filtros de Pesquisa para Salas</h2>
+					
 					<div class="form-group">
 						<label>Número da Porta da Sala </label> <input type="text" class="form-control" id="nPortafiltro" name="nPortafiltro" placeholder="Digite a porta" autofocus>
 					</div>
@@ -117,7 +101,13 @@
 					<button type="submit" class="btn btn-primary btn-md">Listar	Todas as Salas Cadastradas</button>
 				</form>
 			</fieldset>
-
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="panel-body">
+			<h3>Lista de Salas Cadastradas</h3>
+		</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -136,8 +126,62 @@
 							<td>${sala.nPorta}</td>
 							<td>${sala.bloco}</td>
 							<td>${sala.descricao}</td>
+							<td>			
+								<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#${sala.id}salamodal"><span class="glyphicon glyphicon-list-alt"></span></button>
+								<div class="modal fade" id="${sala.id}salamodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel">Reservas dessa Sala</h4>
+											</div>
+											<form action="visualizarreservassalas" method="get">
+												<div class="modal-body">
+													<fieldset>
+														<input type="hidden" name="idsalafiltro" id="idsalafiltro" value="${sala.id}">
+														<div class="form-group">
+															<label>Digite o Horário Desejado (A,B,C,D,E,F) </label>
+															<input type="text" class="form-control" id="horariofiltro" name="horariofiltro" placeholder="Digite o horário desejado">
+														</div>
+														<div class="form-group">
+															<label>Digite o dia do mês </label>
+															<input type="text" class="form-control" id="diafiltro" name="diafiltro" placeholder="Digite o dia">
+														</div>
+														<div class="form-group">
+															<label>Digite o mês desse ano </label>
+															<input type="text" class="form-control" id="mesfiltro" name="mesfiltro" placeholder="Digite o mês">
+														</div>
+													</fieldset>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-sign"></span></button>
+													<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span></button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</td>
+							
 							<td>
-								<a href="deletarsalas/${sala.id}" class="btn btn-danger btn-md"><span class="glyphicon glyphicon-trash"></a>
+								<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#${sala.id}delete" ><span class="glyphicon glyphicon-trash"></button>
+								
+								<div class="modal fade" id="${sala.id}delete" role="dialog">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<div class="modal-body">
+								            	<h3> Deseja realmente excluir essa Sala?</h3>
+								      		</div>
+										    <div class="modal-footer">
+											    <a href="deletarsalas/${sala.id}" class="btn btn-danger btn-md">Apagar Sala</a>
+											    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+										    </div>
+								    	</div>
+									</div>
+								</div>
+								
 							</td>
 							<td>
 								<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#${sala.id}"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -150,7 +194,7 @@
 												</button>
 												<h4 class="modal-title" id="myModalLabel">Atualizar Sala</h4>
 											</div>
-											<form action="atualizarsalas" method="post">
+											<form:form action="atualizarsalas" method="post">
 												<div class="modal-body">
 													<fieldset>
 													<legend>Informações da Sala</legend>
@@ -168,8 +212,52 @@
 															<input type="text" class="form-control" id="bloco" name="bloco" value="${sala.bloco}">
 														</div>
 														<div class="form-group">
-															<label>Descrição Geral sober a Sala </label>
+															<label>Descrição Geral sobre a Sala </label>
 															<input type="text" class="form-control" id="descricao" name="descricao" value="${sala.descricao}">
+														</div>
+													</fieldset>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-sign"></span></button>
+													<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span></button>
+												</div>
+											</form:form>
+										</div>
+									</div>
+								</div>
+							</td>
+							
+							<td>
+								<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addreservemodal"><span class="glyphicon glyphicon-plus"></span></button>
+								<div class="modal fade" id="addreservemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel">Adicionar Reserva</h4>
+											</div>
+											<form action="criarreserva" method="post">
+												<div class="modal-body">
+													<fieldset>
+													<legend>Informações da Reserva</legend>
+														<input type="hidden" name="idSala" id="idSala" value="${sala.id}">
+														<div class="form-group">
+															<label>Descrição Geral sobre a Reserva </label>
+															<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite uma descrição sobre a reserva">
+														</div>
+														<div class="form-group">
+															<label>Digite o Horário Desejado (A,B,C,D,E,F) </label>
+															<input type="text" class="form-control" id="horario" name="horario" placeholder="Digite o horário desejado">
+														</div>
+														<div class="form-group">
+															<label>Digite o dia do mês </label>
+															<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o dia">
+														</div>
+														<div class="form-group">
+															<label>Digite o mês desse ano </label>
+															<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o mês">
 														</div>
 													</fieldset>
 												</div>
@@ -186,10 +274,15 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
 	</div>
 	
-	<c:import url="/imports/rodape_adm.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/rodape.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/rodape_adm.jsp" />
+    </c:if>
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>

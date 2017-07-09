@@ -10,8 +10,14 @@
 	<link rel="stylesheet" href="css/bootstrap-united.min.css">
 	<link rel="stylesheet" href="css/estilosalas.css">
 </head>
-<body>
-	<c:import url="/imports/cabecalho.jsp" />
+<body>	
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/cabecalho.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/cabecalho_adm.jsp" />
+    </c:if>	
 	
 	<div class="container">
 		<h1>
@@ -19,7 +25,13 @@
 		</h1>
 	</div>
 	
-	<c:import url="/imports/rodape.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/rodape.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/rodape_adm.jsp" />
+    </c:if>
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>

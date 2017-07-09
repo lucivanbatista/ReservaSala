@@ -1,5 +1,5 @@
 .field_cadastrar{
-	width: 95%;
+	width: 60%;
 	padding: 20px;
 }
 
@@ -7,8 +7,12 @@
 	width: 50%;
 }
 
+fieldset form input[type="text"] {
+    width: 200px;
+}
+
 div #logo_geral{
 	margin: 0;
 	padding: 0;
-	margin-top: 100px;
+	margin-top: 20px;
 }

@@ -41,7 +41,6 @@ public class SalasController {
 			return "sala/managersalas";
 		}
 		
-		
 		saladao.save(sala);
 		redirectAttributes.addFlashAttribute("msg", "Sala inserida com sucesso.");
 		return "sala/managersalas";
@@ -78,7 +77,6 @@ public class SalasController {
 		List<Sala> salas = null;
 		if(nPorta.equals("") && bloco.equals("")){
 			salas = saladao.findAll();
-			
 		}else{
 			salas = getsalasby(nPorta, bloco);
 		}

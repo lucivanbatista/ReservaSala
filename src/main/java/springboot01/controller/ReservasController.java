@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,9 +77,9 @@ public class ReservasController {
 //		
 //	}
 	
-	@PostMapping(value = "/deletereserva")
-	public String deleteReserva(Model model, @RequestParam(value = "idremove") Integer idr, @SessionAttribute("user") Usuario user){
-		reservedao.delete(idr);
+	@GetMapping(value = "/deletereserva/{id}")
+	public String deleteReserva(Model model, @PathVariable Integer id, @SessionAttribute("user") Usuario user){
+		reservedao.delete(id);
 		model.addAttribute("reservas", reservedao.findByUser(user));
 		if(user.getTipoUser() == 0){
 			return "redirect:/managerreservas";
@@ -112,7 +113,45 @@ public class ReservasController {
 		return "reserva/usermyreserva";
 	}
 	
+	//Método usado no getreservasby para retornar apenas a lista de reservas
+	public List<Reserva> getreservasby(Sala sala, String horario, Integer dia, Integer mes){
+		List<Reserva> reservas = null;
+		
+		if((horario.isEmpty() || horario.equals("")) && (dia == null) && (mes == null)){
+			reservas = reservedao.findBySala(sala);
+		}else if((horario.isEmpty() || horario.equals("")) && (dia == null)){ // Apenas Mês para Pesquisar
+			reservas = reservedao.findBySalaAndMes(sala, mes);
+		}else if((horario.isEmpty() || horario.equals("")) && (mes == null)){ // Apenas Dia para Pesquisar
+			reservas = reservedao.findBySalaAndDia(sala, dia);
+		}else if((mes == null && dia == null )){ 							// Apenas Horário para Pesquisar
+			reservas = reservedao.findBySalaAndHorario(sala, horario);	
+		}else if(horario.isEmpty() || horario.equals("")){ //Apenas Horário está vazio
+			reservas = reservedao.findBySalaAndDiaAndMes(sala, dia, mes);
+		}else if(dia == null){ 								//Apenas Dia está vazio
+			reservas = reservedao.findBySalaAndHorarioAndMes(sala, horario, mes);
+		}else if(mes == null){ 								//Apenas Mês está vazio
+			reservas = reservedao.findBySalaAndHorarioAndDia(sala, horario, dia);
+		}
+		return reservas;
+	}
+	
+	@GetMapping("/visualizarreservassalas")
+	public String visualizarreservassalas(Model model, @SessionAttribute("user") Usuario user, @RequestParam("idsalafiltro") Integer idsala,
+			@RequestParam("horariofiltro") String horario, @RequestParam("diafiltro") Integer dia, @RequestParam("mesfiltro") Integer mes){
+		Sala s = saladao.findOne(idsala);
+		List<Reserva> reservas = null;
+		model.addAttribute("sala", s);
+		
+		if((dia != null) &&(mes != null) && (!horario.equals("") || horario != "")){
+			reservas = reservedao.findBySalaAndHorarioAndDiaAndMes(s, horario, dia, mes);
+		}else{
+			reservas = getreservasby(s, horario, dia, mes);
+		}
 
+		model.addAttribute("reservas", reservas);
+		
+		return "reserva/visualizarreservassalas";
+	}
 
 //	@PostMapping(value = "/criarreserva")
 //	public String insertReserva(Model model, Reserva r){

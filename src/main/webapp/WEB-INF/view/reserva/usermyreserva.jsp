@@ -11,7 +11,13 @@
 	<link rel="stylesheet" href="css/estilosalas.css">
 </head>
 <body>
-	<c:import url="/imports/cabecalho.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/cabecalho.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/cabecalho_adm.jsp" />
+    </c:if>
 	
 	<div class="container">
 		<h1>
@@ -53,10 +59,21 @@
 							<td>${reserva.dia}</td>
 							<td>${reserva.mes}</td>
 							<td>
-								<form action="deletereserva" method="post">
-									<input type="hidden" name="idremove" id="idremove" value="${reserva.id}">
-									<button type="submit" class="btn btn-danger btn-md"><span class="glyphicon glyphicon-trash"></button>
-								</form>
+								<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#${reserva.id}delete" ><span class="glyphicon glyphicon-trash"></button>
+								
+								<div class="modal fade" id="${reserva.id}delete" role="dialog">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<div class="modal-body">
+								            	<h3> Deseja realmente excluir essa Sala?</h3>
+								      		</div>
+										    <div class="modal-footer">
+											    <a href="deletereserva/${reserva.id}" class="btn btn-danger btn-md">Apagar Reserva</a>
+											    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+										    </div>
+								    	</div>
+									</div>
+								</div>
 							</td>
 							<td>
 								<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#${reserva.id}"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -118,7 +135,13 @@
 		</div>
 	</div>
 	
-	<c:import url="/imports/rodape.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/rodape.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/rodape_adm.jsp" />
+    </c:if>
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>

@@ -40,7 +40,8 @@ public class UserController {
 		
 		req.getSession().setAttribute("user", user);
 		model.addAttribute(user);
-		//model.addAttribute("sala", new Sala());
+//		model.addAttribute("sala", new Sala());
+//		model.addAttribute("salas", new Sala());
 		
 		if(user.getTipoUser() == 0){
 			System.out.println("É ADMIN");

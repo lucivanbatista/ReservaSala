@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +12,13 @@
 	<link rel="stylesheet" href="css/estilosalas.css">
 </head>
 <body>
-	<c:import url="/imports/cabecalho_adm.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/cabecalho.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/cabecalho_adm.jsp" />
+    </c:if>
 	
 	<div class="container">
 		<h1>
@@ -31,41 +38,7 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">Adicionar Reservas</h4>
 						</div>
-						<form action="criarreserva" method="post">
-							<div class="modal-body">
-								<fieldset>
-								<legend>Informações da Reserva</legend>
-<!-- 									<div class="form-group"> -->
-<!-- 										<label>Número da Matrícula do Usuário </label> -->
-<!-- 										<input type="text" class="form-control" id="matriculaUser" name="matriculaUser" placeholder="Digite a matrícula do usuário" autofocus> -->
-<!-- 									</div> -->
-									<div class="form-group">
-										<label>ID da Sala </label>
-										<input type="text" class="form-control" id="idSala" name="idSala"	placeholder="Digite o id da sala">
-									</div>
-									<div class="form-group">
-										<label>Descrição Geral sobre a Reserva </label>
-										<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Digite uma descrição sobre a reserva">
-									</div>
-									<div class="form-group">
-										<label>Digite o Horário Desejado (A,B,C,D,E,F) </label>
-										<input type="text" class="form-control" id="horario" name="horario" placeholder="Digite o horário desejado">
-									</div>
-									<div class="form-group">
-										<label>Digite o dia do mês </label>
-										<input type="text" class="form-control" id="dia" name="dia" placeholder="Digite o dia">
-									</div>
-									<div class="form-group">
-										<label>Digite o mês desse ano </label>
-										<input type="text" class="form-control" id="mes" name="mes" placeholder="Digite o mês">
-									</div>
-								</fieldset>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-								<button type="submit" class="btn btn-success">Confirmar Reserva</button>
-							</div>
-						</form>
+						<c:import url="/imports/form_cad_reserve.jsp" /> <%--importando da pasta imports o cadastrar reservas --%>
 					</div>
 				</div>
 			</div>
@@ -110,11 +83,23 @@
 							<td>${reserva.horario}</td>
 							<td>${reserva.dia}</td>
 							<td>${reserva.mes}</td>
-							<td>
-								<form action="deletereserva" method="post">
-									<input type="hidden" name="idremove" id="idremove" value="${reserva.id}">
-									<button type="submit" class="btn btn-danger btn-md"><span class="glyphicon glyphicon-trash"></span></button>
-								</form>
+							<td>								
+								<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#${reserva.id}delete" ><span class="glyphicon glyphicon-trash"></button>
+								
+								<div class="modal fade" id="${reserva.id}delete" role="dialog">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<div class="modal-body">
+								            	<h3> Deseja realmente excluir essa Sala?</h3>
+								      		</div>
+										    <div class="modal-footer">
+											    <a href="deletereserva/${reserva.id}" class="btn btn-danger btn-md">Apagar Reserva</a>
+											    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+										    </div>
+								    	</div>
+									</div>
+								</div>
+								
 							</td>
 							<td>
 								<button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#${reserva.id}"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -179,7 +164,13 @@
 		</div>
 	</div>
 	
-	<c:import url="/imports/rodape_adm.jsp" />
+	<c:if test = "${user.tipoUser > 0}">
+         <c:import url="/imports/rodape.jsp" />
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <c:import url="/imports/rodape_adm.jsp" />
+    </c:if>
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>

@@ -27,7 +27,7 @@ public class Reserva {
 	
 	@NotNull
 //	@Pattern(regexp = "([A-F])+", message="Padrao inexperado, somente letras maiusculas")
-	private char horario;
+	private String horario;
 
 	@NotNull
 //	@Pattern(regexp = "([0-9])+", message="Padrao inexperado, somente numeros")
@@ -52,7 +52,7 @@ public class Reserva {
 		
 	}
 
-	public Reserva(int id, Usuario user, Sala sala, String descricao, char horario, int dia, int mes) {
+	public Reserva(int id, Usuario user, Sala sala, String descricao, String horario, int dia, int mes) {
 	this.id = id;
 	this.user = user;
 	this.sala = sala;
@@ -78,11 +78,11 @@ public class Reserva {
 		this.descricao = descricao;
 	}
 
-	public char getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(char horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 
