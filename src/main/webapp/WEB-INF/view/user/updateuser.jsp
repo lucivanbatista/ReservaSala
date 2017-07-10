@@ -50,7 +50,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label col-form-label-sm">Senha Antiga</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="senha" name="senha" value="${user.senha}">
+							<input type="password" class="form-control" id="senha" name="senha" value="${user.senha}">
 						</div>
 					</div>					
 					
