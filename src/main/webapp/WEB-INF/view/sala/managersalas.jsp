@@ -13,11 +13,11 @@
 </head>
 <body>
 	<c:if test = "${user.tipoUser > 0}">
-         <c:import url="/imports/cabecalho.jsp" />
+         <c:import url="../imports/cabecalho.jsp" />
     </c:if>
     
     <c:if test = "${user.tipoUser < 1}">
-         <c:import url="/imports/cabecalho_adm.jsp" />
+         <c:import url="../imports/cabecalho_adm.jsp" />
     </c:if>
 	
 	<div class="container intro">
@@ -38,7 +38,7 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">Adicionar Sala</h4>
 						</div>
-						<c:import url="/imports/form_cad_sala.jsp" /> <%--importando da pasta imports o cadastrar salas --%>
+						<c:import url="../imports/form_cad_sala.jsp" /> <%--importando da pasta imports o cadastrar salas --%>
 					</div>
 				</div>
 			</div>
@@ -350,11 +350,11 @@
 	</div>
 	
 	<c:if test = "${user.tipoUser > 0}">
-         <c:import url="/imports/rodape.jsp" />
+         <c:import url="../imports/rodape.jsp" />
     </c:if>
     
     <c:if test = "${user.tipoUser < 1}">
-         <c:import url="/imports/rodape_adm.jsp" />
+         <c:import url="../imports/rodape_adm.jsp" />
     </c:if>
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>

@@ -1,10 +1,13 @@
 body {
-	background: #C0C0C0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     padding-bottom: 50px;
+}
+
+.barratop{
+	height: 5px;
 }
 
 .navbar-fixed-bottom{
@@ -25,10 +28,6 @@ body {
 
 .intro{
 	padding-top: 50px;
-}
-
-.panel{
-	background-color: #C0C0C0;
 }
 
 .field_cadastrar{
@@ -59,3 +58,6 @@ div #logo_geral{
 	margin: 0px;
 }
 
+select{
+	color: black !important;
+}

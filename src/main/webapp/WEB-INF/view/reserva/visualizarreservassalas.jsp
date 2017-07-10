@@ -13,11 +13,11 @@
 </head>
 <body>
 	<c:if test = "${user.tipoUser > 0}">
-         <c:import url="/imports/cabecalho.jsp" />
+         <c:import url="../imports/cabecalho.jsp" />
     </c:if>
     
     <c:if test = "${user.tipoUser < 1}">
-         <c:import url="/imports/cabecalho_adm.jsp" />
+         <c:import url="../imports/cabecalho_adm.jsp" />
     </c:if>
 	
 	<div class="container intro">
@@ -236,11 +236,11 @@
 	</div>
 	
 	<c:if test = "${user.tipoUser > 0}">
-         <c:import url="/imports/rodape.jsp" />
+         <c:import url="../imports/rodape.jsp" />
     </c:if>
     
     <c:if test = "${user.tipoUser < 1}">
-         <c:import url="/imports/rodape_adm.jsp" />
+         <c:import url="../imports/rodape_adm.jsp" />
     </c:if>
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.js"></script>

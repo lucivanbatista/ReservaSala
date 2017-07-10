@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top barratop">
 	<div class="navbar-header">
 		<a href="/managersalas" class="navbar-brand">Sistema de Reservas de Salas</a>
 		<button class="navbar-toggle" type="button" data-target=".navbar-collapse" data-toggle="collapse"></button>

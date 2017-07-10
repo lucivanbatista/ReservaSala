@@ -43,9 +43,9 @@ public class UserController {
 //		model.addAttribute("salas", new Sala());
 		
 		if(user.getTipoUser() == 0){
-			return "sala/managersalas";
+			return "forward:/sala/managersalas";
 		}else if(user.getTipoUser() == 1 || user.getTipoUser() == 2){
-			return "user/indexuser";
+			return "forward:/indexuser";
 		}else{
 			return "/login";
 		}
@@ -72,7 +72,7 @@ public class UserController {
 		if(req.getSession() != null){
 			req.getSession().invalidate();
 		}
-		return "/login";
+		return "redirect:/login";
 	}
 	
 	@PostMapping("/atualizaruser")
