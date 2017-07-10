@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import springboot01.dao.ReserveDao;
 import springboot01.dao.RoomDao;
+import springboot01.model.Reserva;
 import springboot01.model.Sala;
 import springboot01.model.Usuario;
 
@@ -26,6 +28,9 @@ public class SalasController {
 	
 	@Autowired
 	private RoomDao saladao;
+	
+	@Autowired
+	private ReserveDao reservedao;
 	
 	@PostMapping(value = "/criarsalas")
 	public String createSala(@Valid Sala sala, BindingResult result, Model model, RedirectAttributes redirectAttributes) {	
@@ -91,6 +96,9 @@ public class SalasController {
 	
 	@GetMapping(value = "/deletarsalas/{id}")
 	public String delete(Model model, @PathVariable Integer id){
+		Sala s = saladao.findOne(id);
+		List<Reserva> r = reservedao.findBySala(s);
+		reservedao.delete(r);
 		saladao.delete(id);
 		model.addAttribute("salas", saladao.findAll());
 		return "redirect:/managersalas";

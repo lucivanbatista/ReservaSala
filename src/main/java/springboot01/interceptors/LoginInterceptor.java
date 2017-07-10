@@ -37,7 +37,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				}
 			}
 		}else if(request.getSession().getAttribute("usuario") == null){
-			if(uri.contains("login") || uri.contains("cadastro")){
+			if(uri.contains("login") || uri.contains("cadastro") || uri.contains("sobre")){
 				return true;
 			}else{
 				response.sendRedirect("/login");
