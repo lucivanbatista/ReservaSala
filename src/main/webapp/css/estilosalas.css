@@ -61,3 +61,7 @@ div #logo_geral{
 select{
 	color: black !important;
 }
+
+.buttondrop{
+	margin-right: 10px;
+}

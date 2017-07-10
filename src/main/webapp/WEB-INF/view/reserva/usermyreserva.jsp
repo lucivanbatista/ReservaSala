@@ -32,7 +32,7 @@
 			</div>
 
 			<form action="showallmyreservas" method="get">
-				<button type="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-search"> </span> Listar	Minhas Reservas Cadastradas</button>
+				<button type="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-search"> </span> Listar Minhas Reservas Cadastradas</button>
 			</form>
 
 			<table class="table">

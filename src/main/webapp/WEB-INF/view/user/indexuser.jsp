@@ -18,12 +18,28 @@
     <c:if test = "${user.tipoUser < 1}">
          <c:import url="../imports/cabecalho_adm.jsp" />
     </c:if>	
+    
+    <c:if test = "${user.tipoUser > 0}">
+    	<div class="container intro">
+			<h1>
+				Página Inicial <small> Reserve e gerencie salas para utilizar futuramente!</small>
+			</h1>
+			<h2>Deseja Visualizar Salas? Acesse: <a href="usersala">Visualizar Salas</a></h2>
+			<h2>Deseja Visualizar Suas Reservas? Acesse: <a href="usermyreserva">Visualizar Minhas Reservas</a></h2>
+		</div>
+    </c:if>
+    
+    <c:if test = "${user.tipoUser < 1}">
+         <div class="container intro">
+			<h1>
+				Página Inicial <small> Reserve e gerencie salas para utilizar futuramente!</small>
+			</h1>
+			<h2>Deseja Gerenciar Salas? Acesse: <a href="managersalas">Gerenciar Salas</a></h2>
+			<h2>Deseja Gerenciar As Reservas? Acesse: <a href="managerreservas">Gerenciar as Reservas</a></h2>
+		</div>
+    </c:if>
 	
-	<div class="container intro">
-		<h1>
-			Página Inicial <small> Reserve e gerencie salas para utilizar futuramente!</small>
-		</h1>
-	</div>
+	
 	
 	<c:if test = "${user.tipoUser > 0}">
          <c:import url="../imports/rodape.jsp" />

@@ -19,7 +19,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(request.getSession().getAttribute("user") != null){
 			if(user.getTipoUser() == 0){ //ADMIN
 				if(uri.contains("login") || (uri.contains("cadastro"))){
-					response.sendRedirect("/managersalas");
+					response.sendRedirect("/indexuser");
 					return true;
 				}else{
 					return true;
